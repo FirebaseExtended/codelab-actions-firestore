@@ -1,0 +1,5 @@
+handlers:
+- name: spellingBeeTest
+- name: spellingBeePractice
+inlineCloudFunction:
+  executeFunction: ActionsOnGoogleFulfillment

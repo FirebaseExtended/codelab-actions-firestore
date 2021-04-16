@@ -1,0 +1,12 @@
+// package.json
+{
+  "name": "ActionsOnGoogleFulfillment",
+  "version": "0.1.0",
+  "description": "Actions on Google fulfillment",
+  "main": "index.js",
+  "dependencies": {
+    "@assistant/conversation": "^3.0.0",
+    "firebase-admin": "^5.4.3",
+    "firebase-functions": "^0.7.1"
+  }
+}
