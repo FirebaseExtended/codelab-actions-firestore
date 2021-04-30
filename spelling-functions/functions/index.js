@@ -13,12 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// Import the Actions SDK
 const {conversation} = require('@assistant/conversation');
+// Import the Firebase SDK for Cloud Functions
 const functions = require('firebase-functions');
+
 const https = require('https');
 const app = conversation();
 const cors = require('cors')({origin: true});
 
+// Import and initialize the Firebase Admin SDK.
 const admin = require('firebase-admin');
 admin.initializeApp();
 const db = admin.firestore();
@@ -95,7 +99,7 @@ app.handle('getSpellingWordList', conv => {
           VocabularyList.push(obj);
       }
       
-      //Shuffle the array
+      // shuffle the array
       var currentIndex = VocabularyList.length, temporaryValue, randomIndex;
       while (0 !== currentIndex) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -111,7 +115,7 @@ app.handle('getSpellingWordList', conv => {
   });
 })
 
-//Function returns a single word
+// function returns a single word
 app.handle('getSpellingWord',  conv => {
   if (!conv.session.params.vocabWord.empty) {
     conv.session.params.vocabWordIndex+=1;
