@@ -16,16 +16,16 @@
 
 // TODO(DEVELOPER): Import the Cloud Functions for Firebase, Firebase Admin modules and Actions SDK here.
 
-// TODO(DEVELOPER): Write the getWordDetailsFromDictionaryAPI Function here.
+// TODO(DEVELOPER): Write the getWordDetailsFromDictionaryAPI function here.
 
-// TODO(DEVELOPER): Write the createSpellingPracticeWord Function here.
+// TODO(DEVELOPER): Write the createSpellingPracticeWord function here.
 
-// TODO(DEVELOPER): Write the app Handle getSpellingWordList Function here.
+// TODO(DEVELOPER): Write the app Handle getSpellingWordList function here.
 
-// TODO(DEVELOPER): Write the app Handle getSpellingWord Function here.
+// TODO(DEVELOPER): Write the app Handle getSpellingWord function here.
 
-// TODO(DEVELOPER): Write the app Handle repeatSpellingWord Function here.
+// TODO(DEVELOPER): Write the app Handle repeatSpellingWord function here.
 
-// TODO(DEVELOPER): Write the app Handle definitionOfSpellingWord Function here.
+// TODO(DEVELOPER): Write the app Handle definitionOfSpellingWord function here.
 
-// TODO(DEVELOPER): Write the app Handle veryfySpellingWord Function here.
+// TODO(DEVELOPER): Write the app Handle veryfySpellingWord function here.
