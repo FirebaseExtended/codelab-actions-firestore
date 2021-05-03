@@ -27,7 +27,8 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 const db = admin.firestore();
 
-
+// Retrieves word definition and audio pronunciation from api.dictionaryapi.dev service
+// Function uses service provided by https://dictionaryapi.dev/
 async function getWordDetailsFromDictionaryAPI(word) {
   var responseData="";
   var req = https.request({
@@ -52,6 +53,7 @@ async function getWordDetailsFromDictionaryAPI(word) {
   req.end();
 }
 
+// Firestore trigger that fetches word definitions through getWordDetailsFromDictionaryAPI for every new Firestore document
 exports.createSpellingPracticeWord = functions.firestore
   .document('wordlist/{word}')
   .onCreate((snap, context) => {
@@ -60,7 +62,7 @@ exports.createSpellingPracticeWord = functions.firestore
     getWordDetailsFromDictionaryAPI(word);
 });
 
-
+// Store the list of spelling words in Assistant session
 app.handle('getSpellingWordList', conv => {
   const wordListRef = db.collection('wordlist').limit(50);
   const snapshot = wordListRef;
@@ -115,7 +117,7 @@ app.handle('getSpellingWordList', conv => {
   });
 })
 
-// function returns a single word
+// Returns a spelling practice word to Google Assistant
 app.handle('getSpellingWord',  conv => {
   if (!conv.session.params.vocabWord.empty) {
     conv.session.params.vocabWordIndex+=1;
@@ -125,9 +127,10 @@ app.handle('getSpellingWord',  conv => {
     conv.add(ssml);
   }
   else
-    conv.add('Gret job! You have completed  the Spelling Bee');
+    conv.add('Great job! You completed the Spelling practice');
 });
 
+// Returns current spelling word
 app.handle('repeatSpellingWord',  conv => {
   if (!conv.session.params.vocabWord.empty) {
     const ssml = '<speak>' +
@@ -136,13 +139,15 @@ app.handle('repeatSpellingWord',  conv => {
     conv.add(ssml);
   }
   else
-    conv.add('Gret job! You have completed  the Spelling Bee');
+    conv.add('Great job! You completed the Spelling practice');
 });
 
+// Returns spelling word definition from Assistant session parameter
 app.handle('definitionOfSpellingWord',  conv => {
   conv.add( 'It means ' + conv.session.params.vocabWord[conv.session.params.vocabWordIndex].definition);
 });
 
+// Verifies user spelling response
 app.handle('verifySpellingWord', conv => {
   try {
     userResponse = conv.intent.params.userresponse.resolved.join("");
