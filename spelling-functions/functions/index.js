@@ -30,8 +30,8 @@ const db = admin.firestore();
 // Retrieves word definition and audio pronunciation from api.dictionaryapi.dev service
 // Function uses service provided by https://dictionaryapi.dev/
 async function getWordDetailsFromDictionaryAPI(word) {
-  var responseData="";
-  var req = https.request({
+  let responseData="";
+  let req = https.request({
     host: 'api.dictionaryapi.dev',
     port: 443,
     path:'/api/v2/entries/en/' + word,
@@ -42,7 +42,7 @@ async function getWordDetailsFromDictionaryAPI(word) {
         responseData+=d;
     })
     res.on('end',function(){
-        var object = JSON.parse(responseData)
+        let object = JSON.parse(responseData)
         const wordListRef = db.collection('wordlist');
         wordListRef.doc(object[0].word).set(
           object[0]
@@ -76,8 +76,8 @@ app.handle('getSpellingWordList', conv => {
   return snapshot.get().then(snapshot => {
     snapshot.forEach(doc => {
       if (doc.data().word) {
-          var definition = 'unknown';
-          var audio = 'unknown';
+          let definition = 'unknown';
+          let audio = 'unknown';
           try {
             if(doc.data().hasOwnProperty('meanings')) {
               if(doc.data().meanings[0].hasOwnProperty('definitions')) {
@@ -92,7 +92,7 @@ app.handle('getSpellingWordList', conv => {
             console.log(error);
           }
 
-          var obj = {
+          let obj = {
             word: doc.data().word,
             answer: doc.data().word.split("").join(" "),
             definition: definition,
@@ -102,7 +102,7 @@ app.handle('getSpellingWordList', conv => {
       }
       
       // shuffle the array
-      var currentIndex = VocabularyList.length, temporaryValue, randomIndex;
+      let currentIndex = VocabularyList.length, temporaryValue, randomIndex;
       while (0 !== currentIndex) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
@@ -117,10 +117,10 @@ app.handle('getSpellingWordList', conv => {
   });
 })
 
-// Returns a spelling practice word to Google Assistant
+// Returns a spelling practice word to Google Assistant and uses Speech Synthesis Markup Language (SSML) to format the response
 app.handle('getSpellingWord',  conv => {
   if (!conv.session.params.vocabWord.empty) {
-    conv.session.params.vocabWordIndex+=1;
+    conv.session.params.vocabWordIndex += 1;
     const ssml = '<speak>' +
     '<audio src="'+ conv.session.params.vocabWord[conv.session.params.vocabWordIndex].audio +'">Use phonetics to spell the word.</audio> ' +
     '</speak>';
