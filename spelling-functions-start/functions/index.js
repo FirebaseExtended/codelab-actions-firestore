@@ -28,4 +28,4 @@
 
 // TODO(DEVELOPER): Write the app Handle definitionOfSpellingWord function here.
 
-// TODO(DEVELOPER): Write the app Handle veryfySpellingWord function here.
+// TODO(DEVELOPER): Write the app Handle verifySpellingWord function here.
