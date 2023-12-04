@@ -14,7 +14,7 @@
   "main": "index.js",
   "dependencies": {
     "@assistant/conversation": "^3.2.0",
-    "firebase-admin": "^9.2.0",
+    "firebase-admin": "^11.11.1",
     "firebase-functions": "^3.11.0"
   },
   "devDependencies": {
